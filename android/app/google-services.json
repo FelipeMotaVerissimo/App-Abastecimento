@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768557846321",
+    "project_id": "app-abastecimento-4a1fa",
+    "storage_bucket": "app-abastecimento-4a1fa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768557846321:android:82d93861a97ea9af53ea10",
+        "android_client_info": {
+          "package_name": "com.example.app_abastecimento"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQocVX0r8GMeX6nAH79f_LXrTn0h3L5pg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
