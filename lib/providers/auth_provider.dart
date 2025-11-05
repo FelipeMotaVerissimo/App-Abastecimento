@@ -39,24 +39,30 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  // Cadastro
-  Future<bool> signUp(String email, String password) async {
-    try {
-      _errorMessage = null;
-      _isLoading = true;
-      notifyListeners();
+// Cadastro
+Future<bool> signUp(String email, String password) async {
+  try {
+    print('🔵 Iniciando cadastro para: $email');
+    _errorMessage = null;
+    _isLoading = true;
+    notifyListeners();
 
-      await _authService.createUserWithEmailAndPassword(email, password);
-      _isLoading = false;
-      notifyListeners();
-      return true;
-    } catch (e) {
-      _errorMessage = e.toString();
-      _isLoading = false;
-      notifyListeners();
-      return false;
-    }
+    print('🔵 Chamando Firebase...');
+    await _authService.createUserWithEmailAndPassword(email, password);
+    
+    print('✅ Cadastro realizado com sucesso!');
+    _isLoading = false;
+    notifyListeners();
+    return true;
+  } catch (e) {
+    print('❌ ERRO no cadastro: $e');
+    print('❌ Tipo do erro: ${e.runtimeType}');
+    _errorMessage = e.toString();
+    _isLoading = false;
+    notifyListeners();
+    return false;
   }
+}
 
   // Logout
   Future<void> signOut() async {
