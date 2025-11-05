@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../screens/veiculos/veiculos_screen.dart';
+import '../screens/abastecimentos/registro_abastecimento_screen.dart';
+import '../screens/abastecimentos/historico_abastecimento_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -84,10 +86,9 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Registrar Abastecimento'),
             onTap: () {
               Navigator.pop(context);
-              // Será implementado na Etapa 4
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Será implementado na Etapa 4'),
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const RegistroAbastecimentoScreen(),
                 ),
               );
             },
@@ -97,10 +98,9 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Histórico de Abastecimentos'),
             onTap: () {
               Navigator.pop(context);
-              // Será implementado na Etapa 4
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Será implementado na Etapa 4'),
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const HistoricoAbastecimentoScreen(),
                 ),
               );
             },

@@ -5,6 +5,7 @@ import 'firebase_options.dart';
 import 'theme/app_theme.dart';
 import 'providers/auth_provider.dart';
 import 'providers/veiculo_provider.dart';
+import 'providers/abastecimento_provider.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/home_screen.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => VeiculoProvider()),
+        ChangeNotifierProvider(create: (_) => AbastecimentoProvider()),
       ],
       child: MaterialApp(
         title: 'Controle de Abastecimento',

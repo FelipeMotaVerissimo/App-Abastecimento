@@ -1,12 +1,31 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import '../providers/abastecimento_provider.dart';
 import '../widgets/app_drawer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _carregarEstatisticas();
+  }
+
+  void _carregarEstatisticas() {
+    final authProvider = context.read<AuthProvider>();
+    final abastecimentoProvider = context.read<AbastecimentoProvider>();
+    
+    if (authProvider.user != null) {
+      abastecimentoProvider.carregarEstatisticas(authProvider.user!.uid);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +79,80 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             
+            // Estatísticas
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Consumer<AbastecimentoProvider>(
+                builder: (context, provider, _) {
+                  final stats = provider.estatisticas;
+                  
+                  if (stats == null) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Resumo Geral',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildStatCard(
+                              context,
+                              'Total Gasto',
+                              'R\$ ${stats['totalGasto'].toStringAsFixed(2)}',
+                              Icons.attach_money,
+                              Colors.red,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildStatCard(
+                              context,
+                              'Total Litros',
+                              '${stats['totalLitros'].toStringAsFixed(1)}L',
+                              Icons.local_gas_station,
+                              Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildStatCard(
+                              context,
+                              'Abastecimentos',
+                              '${stats['totalAbastecimentos']}',
+                              Icons.format_list_numbered,
+                              Colors.green,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildStatCard(
+                              context,
+                              'Média R\$/L',
+                              'R\$ ${stats['mediaPrecoLitro'].toStringAsFixed(2)}',
+                              Icons.show_chart,
+                              Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+
             // Ações rápidas
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -79,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                           'Meus Veículos',
                           Icons.directions_car,
                           () {
-                            // Navegar para veículos
+                            // Navegação via drawer
                           },
                         ),
                       ),
@@ -90,7 +183,7 @@ class HomeScreen extends StatelessWidget {
                           'Abastecer',
                           Icons.local_gas_station,
                           () {
-                            // Será implementado na Etapa 4
+                            // Navegação via drawer
                           },
                         ),
                       ),
@@ -98,6 +191,39 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatCard(
+    BuildContext context,
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Icon(icon, size: 32, color: color),
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                  ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
             ),
           ],
         ),
