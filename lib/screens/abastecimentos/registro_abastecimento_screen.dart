@@ -173,7 +173,7 @@ class _RegistroAbastecimentoScreenState
                   }
 
                   return DropdownButtonFormField<String>(
-                    value: _veiculoIdSelecionado,
+                    initialValue: _veiculoIdSelecionado,
                     decoration: const InputDecoration(
                       labelText: 'Veículo',
                       prefixIcon: Icon(Icons.directions_car),
@@ -284,7 +284,7 @@ class _RegistroAbastecimentoScreenState
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
-                value: _tipoCombustivel,
+                initialValue: _tipoCombustivel,
                 decoration: const InputDecoration(
                   labelText: 'Tipo de Combustível',
                   prefixIcon: Icon(Icons.oil_barrel),

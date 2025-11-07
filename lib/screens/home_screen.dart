@@ -1,3 +1,5 @@
+import 'package:app_abastecimento/screens/abastecimentos/registro_abastecimento_screen.dart';
+import 'package:app_abastecimento/screens/veiculos/veiculos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
@@ -172,7 +174,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Meus Veículos',
                           Icons.directions_car,
                           () {
-                            // Navegação via drawer
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const VeiculosScreen(),
+                              ),
+                             );
                           },
                         ),
                       ),
@@ -183,7 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Abastecer',
                           Icons.local_gas_station,
                           () {
-                            // Navegação via drawer
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const RegistroAbastecimentoScreen(),
+                              ),
+                            );
                           },
                         ),
                       ),

@@ -50,7 +50,12 @@ class FirestoreService {
     // Excluir o veículo
     await _firestore.collection('veiculos').doc(id).delete();
   }
-
+  // Atualizar quilometragem do veículo
+  Future<void> atualizarQuilometragem(String veiculoId, double quilometragem) async {
+    await _firestore.collection('veiculos').doc(veiculoId).update({
+      'quilometragemAtual': quilometragem,
+    });
+  }
   // ========== ABASTECIMENTOS ==========
 
   // Criar abastecimento

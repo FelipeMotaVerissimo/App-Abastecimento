@@ -47,7 +47,7 @@ class AbastecimentoProvider with ChangeNotifier {
     );
   }
 
-  // Adicionar abastecimento
+// Adicionar abastecimento
   Future<bool> adicionarAbastecimento(Abastecimento abastecimento) async {
     try {
       _errorMessage = null;
@@ -55,6 +55,12 @@ class AbastecimentoProvider with ChangeNotifier {
       notifyListeners();
 
       await _firestoreService.criarAbastecimento(abastecimento);
+      
+      // Atualizar quilometragem do veículo 
+      await _firestoreService.atualizarQuilometragem(
+        abastecimento.veiculoId,
+        abastecimento.quilometragem,
+      );
       
       _isLoading = false;
       notifyListeners();

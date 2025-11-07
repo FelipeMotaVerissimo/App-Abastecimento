@@ -124,6 +124,13 @@ class _VeiculosScreenState extends State<VeiculosScreen> {
             Text('Placa: ${veiculo.placa}'),
             Text('Ano: ${veiculo.ano}'),
             Text('Combustível: ${veiculo.tipoCombustivel}'),
+            Text(
+              'KM Atual: ${veiculo.quilometragemAtual.toStringAsFixed(0)} km',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
           ],
         ),
         isThreeLine: true,

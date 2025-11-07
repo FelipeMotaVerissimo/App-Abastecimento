@@ -18,6 +18,7 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
   final _marcaController = TextEditingController();
   final _placaController = TextEditingController();
   final _anoController = TextEditingController();
+  final _quilometragemController = TextEditingController();
   
   String _tipoCombustivel = 'Gasolina';
   
@@ -37,6 +38,7 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
     _marcaController.dispose();
     _placaController.dispose();
     _anoController.dispose();
+    _quilometragemController.dispose();
     super.dispose();
   }
 
@@ -52,6 +54,9 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
         ano: int.parse(_anoController.text),
         tipoCombustivel: _tipoCombustivel,
         userId: authProvider.user!.uid,
+         quilometragemAtual: _quilometragemController.text.isEmpty 
+      ? 0 
+      : double.parse(_quilometragemController.text),
       );
 
       final success = await veiculoProvider.adicionarVeiculo(veiculo);
@@ -191,7 +196,7 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
                 },
               ),
               const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
+DropdownButtonFormField<String>(
                 initialValue: _tipoCombustivel,
                 decoration: const InputDecoration(
                   labelText: 'Tipo de Combustível',
@@ -209,6 +214,21 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
                   });
                 },
               ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _quilometragemController,
+                decoration: const InputDecoration(
+                  labelText: 'Quilometragem Atual (Opcional)',
+                  prefixIcon: Icon(Icons.speed),
+                  hintText: 'Ex: 50000',
+                  helperText: 'Deixe vazio se for veículo novo (0 km)',
+                ),
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+              ),      
+                      
               const SizedBox(height: 32),
               Consumer<VeiculoProvider>(
                 builder: (context, provider, _) {

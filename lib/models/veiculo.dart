@@ -6,6 +6,7 @@ class Veiculo {
   final int ano;
   final String tipoCombustivel;
   final String userId;
+  final double quilometragemAtual; // ← NOVO CAMPO
 
   Veiculo({
     this.id,
@@ -15,6 +16,7 @@ class Veiculo {
     required this.ano,
     required this.tipoCombustivel,
     required this.userId,
+    this.quilometragemAtual = 0, // ← VALOR PADRÃO
   });
 
   // Converter para Map (para salvar no Firestore)
@@ -26,6 +28,7 @@ class Veiculo {
       'ano': ano,
       'tipoCombustivel': tipoCombustivel,
       'userId': userId,
+      'quilometragemAtual': quilometragemAtual, // ← ADICIONAR
     };
   }
 
@@ -39,6 +42,7 @@ class Veiculo {
       ano: map['ano'] ?? 0,
       tipoCombustivel: map['tipoCombustivel'] ?? '',
       userId: map['userId'] ?? '',
+      quilometragemAtual: (map['quilometragemAtual'] ?? 0).toDouble(), // ← ADICIONAR
     );
   }
 
@@ -51,6 +55,7 @@ class Veiculo {
     int? ano,
     String? tipoCombustivel,
     String? userId,
+    double? quilometragemAtual, // ← ADICIONAR
   }) {
     return Veiculo(
       id: id ?? this.id,
@@ -60,6 +65,7 @@ class Veiculo {
       ano: ano ?? this.ano,
       tipoCombustivel: tipoCombustivel ?? this.tipoCombustivel,
       userId: userId ?? this.userId,
+      quilometragemAtual: quilometragemAtual ?? this.quilometragemAtual, // ← ADICIONAR
     );
   }
 }
