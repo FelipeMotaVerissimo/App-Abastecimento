@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/abastecimento_provider.dart';
 import '../widgets/app_drawer.dart';
+import '../utils/page_transitions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -175,10 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.directions_car,
                           () {
                             Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const VeiculosScreen(),
-                              ),
-                             );
+                              FadePageRoute(page: const VeiculosScreen()),
+                            );
                           },
                         ),
                       ),
@@ -190,9 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.local_gas_station,
                           () {
                             Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const RegistroAbastecimentoScreen(),
-                              ),
+                              SlidePageRoute(page: const RegistroAbastecimentoScreen()),
                             );
                           },
                         ),
@@ -201,11 +198,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            ),
+            ), 
           ],
         ),
       ),
-    );
+      );
   }
 
   Widget _buildStatCard(

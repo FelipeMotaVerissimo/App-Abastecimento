@@ -4,6 +4,8 @@ import '../providers/auth_provider.dart';
 import '../screens/veiculos/veiculos_screen.dart';
 import '../screens/abastecimentos/registro_abastecimento_screen.dart';
 import '../screens/abastecimentos/historico_abastecimento_screen.dart';
+import '../screens/estatisticas_screen.dart';
+import '../utils/page_transitions.dart'; // ← ADICIONAR
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -75,9 +77,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const VeiculosScreen(),
-                ),
+                FadePageRoute(page: const VeiculosScreen()), // ← COM ANIMAÇÃO
               );
             },
           ),
@@ -87,9 +87,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const RegistroAbastecimentoScreen(),
-                ),
+                SlidePageRoute(page: const RegistroAbastecimentoScreen()), // ← COM ANIMAÇÃO
               );
             },
           ),
@@ -99,9 +97,17 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const HistoricoAbastecimentoScreen(),
-                ),
+                FadePageRoute(page: const HistoricoAbastecimentoScreen()), // ← COM ANIMAÇÃO
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.bar_chart),
+            title: const Text('Estatísticas'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.of(context).push(
+                SlidePageRoute(page: const EstatisticasScreen()), // ← COM ANIMAÇÃO
               );
             },
           ),
