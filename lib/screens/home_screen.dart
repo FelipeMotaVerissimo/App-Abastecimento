@@ -6,6 +6,7 @@ import '../providers/auth_provider.dart';
 import '../providers/abastecimento_provider.dart';
 import '../widgets/app_drawer.dart';
 import '../utils/page_transitions.dart';
+import 'imagens_screen.dart'; // ← ADICIONE
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -199,6 +200,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ), 
+              Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Imagens Extras',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 16),
+                  Center(
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: _buildActionButton(
+                        context,
+                        'Ver Galeria',
+                        Icons.photo_library,
+                        () {
+                          Navigator.of(context).push(
+                            FadePageRoute(page: const ImagensScreen()),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
